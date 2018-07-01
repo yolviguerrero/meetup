@@ -12,7 +12,7 @@ pipeline {
     }
     stage("Build") {
       steps {
-        sh "zip -r ${ARTIFACTOR} ./"
+        sh "zip -r ${ARTIFACTOR} meetup/"
       }
     }
     stage("Test") {
