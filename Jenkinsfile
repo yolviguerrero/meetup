@@ -1,6 +1,5 @@
 pipeline {
   agent any
-
   environment {
     ARTIFACTOR = "${env.BUILD_NUMBER}.zip"
   }
@@ -8,14 +7,12 @@ pipeline {
   stages {
     stage("Repository") {
       steps {
-  
           checkout scm
       }
     }
     stage("Build") {
       steps {
-	sh "zip -r ${ARTIFACTOR} meetup/"
-        }
+        sh "zip -r ${ARTIFACTOR} ./"
       }
     }
     stage("Test") {
@@ -26,8 +23,8 @@ pipeline {
         )
       }
     }
+  } 
 
-  
   post {
     always {
       archiveArtifacts artifacts: "${ARTIFACTOR}", onlyIfSuccessful: true
@@ -35,6 +32,5 @@ pipeline {
       echo "Job has finished"
     }
   }
-
 }
 
